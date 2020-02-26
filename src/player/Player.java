@@ -4,7 +4,7 @@ import materials.Coin;
 
 public class Player {
 
-  private int id;
+  private int id2;
 
   public Player(int id) {
     this.id = id;
