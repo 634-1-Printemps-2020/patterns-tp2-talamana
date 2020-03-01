@@ -13,6 +13,7 @@ public class Game {
     private Coin coin;
     private Map<Player, List<CoinState>> history;
 
+
     public Game() {
         history = new HashMap<>();
     }
@@ -23,14 +24,23 @@ public class Game {
      * @param player le nouveau joueur
      */
     public void addPlayer(Player player) {
-      // TODO: Votre code ici
+      history.put(player,null);
     }
 
     /**
      * Faire joueur tous les joueurs et stocker chaque partie dans history
      */
     public void play() {
-      // TODO: Votre code ici
+      for(Map.Entry<Player,List<CoinState>> player : history.entrySet()){
+          Player actualPlayer = player.getKey();
+          ArrayList<CoinState> lances = new ArrayList<CoinState>();
+
+          while(rules.checkWin(player.getValue())){
+              coin.throwCoin();
+              lances.add(coin.getState());
+              history.put(actualPlayer,lances);
+          }
+      }
     }
 
     /**
@@ -49,8 +59,7 @@ public class Game {
      * @return Map contenant chaque joueur et la liste des ses lancers
      */
     public Map<Player, List<CoinState>> getHistory() {
-      // TODO: Votre code ici
-      return null;
+      return history;
     }
 
 
@@ -61,8 +70,7 @@ public class Game {
      * @return la liste des lancers d'un joueur
      */
     public List<CoinState> getSpecificHistory(Player player) {
-      // TODO: Votre code ici
-      return null;
+      return history.get(player);
     }
 
 }
